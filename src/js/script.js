@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         mainList.chooseShopItems();
         for (let key in mainList) {
           document.getElementById('props').innerHTML += '<li>' + key + '</p>';
-        };
+        }; 
 
     /*function start() {
         budget = prompt('Ваш бюджет?');
