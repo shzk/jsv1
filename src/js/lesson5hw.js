@@ -9,7 +9,7 @@ newLi.innerHTML = 'Пятый элемент';
 menu.appendChild(newLi);
 
 
-document.body.style.backgroundImage = 'url(img/apple_true.jpg)';
+document.body.style.backgroundImage = 'url(../img/apple_true.jpg)';
 
 
 let title = document.getElementById('title');
