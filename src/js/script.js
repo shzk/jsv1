@@ -20,16 +20,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         price;
 
     btn_open.addEventListener('click', () => {
-         money = prompt('Ваш бюджет?');
-         while (isNaN(money) || money == '' || money == null) {
-             money = prompt('Ваш бюджет?','');
-         }
-         budget_value.textContent = money;
-         mainList.budget = money;
-         storeName = prompt('Название вашего магазина?','').toUpperCase();
-         name_value.textContent = storeName;
-         mainList.storeName = storeName;
+         let timer = setTimeout(start, 2000);
     });
+
+    function start() {
+        money = prompt('Ваш бюджет?');
+        while (isNaN(money) || money == '' || money == null) {
+            money = prompt('Ваш бюджет?','');
+        }
+        budget_value.textContent = money;
+        mainList.budget = money;
+        storeName = prompt('Название вашего магазина?','').toUpperCase();
+        name_value.textContent = storeName;
+        mainList.storeName = storeName;
+    };
 
     goods_button.addEventListener('click', () => {
         for (let i = 0; i < goods_item.length; i++ ) {
