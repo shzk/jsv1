@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', function(){
         }
     });
 
+
     //Timer
     let deadline = '2018-04-11';
 
@@ -83,6 +84,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
     setClock('timer', deadline);
 
+
     //scrolling
     let linkNav = document.querySelectorAll('[href^="#"]'), //выбираем все ссылки к якорю на странице
         speed = 0.7;  // скорость, может иметь дробное значение через точку (чем меньше значение - тем больше скорость)
@@ -106,5 +108,31 @@ window.addEventListener('DOMContentLoaded', function(){
                 }
             }
         }, false);
-    }
+    };
+
+
+    //modal
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close');
+
+    more.addEventListener('click', function(){
+        this.classList.add('more-splash');
+        overlay.style.transform = '';
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+
+    close.addEventListener('click', function(){
+        overlay.style.transform = 'translateY(300%)';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    })
+
+
+
+
+
+
+
 });
