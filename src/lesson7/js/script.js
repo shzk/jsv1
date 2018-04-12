@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
     //Timer
-    let deadline = '2018-04-11';
+    let deadline = '2018-04-21';
 
     function getTimeRemaining(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', function(){
             'seconds' : seconds,
             'days' : days
         };
-    };
+    }
 
     function setClock(id,endtime) {
         let timer = document.getElementById(id),
@@ -76,11 +76,11 @@ window.addEventListener('DOMContentLoaded', function(){
                 timerSeconds.innerHTML = 00;
                 clearInterval(timeInterval);
             }
-        };
+        }
 
         updateClock();
         let timeInterval = setInterval(updateClock, 1000);
-    };
+    }
 
     setClock('timer', deadline);
 
@@ -102,13 +102,13 @@ window.addEventListener('DOMContentLoaded', function(){
                     r = (t < 0 ? Math.max(w - progress/speed, w + t) : Math.min(w + progress/speed, w + t));
                 window.scrollTo(0,r);
                 if (r != w + t) {
-                    requestAnimationFrame(step)
+                    requestAnimationFrame(step);
                 } else {
-                    location.hash = hash  // URL с хэшем
+                    location.hash = hash;  // URL с хэшем
                 }
             }
         }, false);
-    };
+    }
 
 
     //modal
@@ -153,4 +153,53 @@ window.addEventListener('DOMContentLoaded', function(){
 
     let myDiv = new Rectangle(100,150,'blue',20,'center');
     myDiv.createDiv();
+
+    //Form
+    let message = new Object();
+    message.loading = "Зарузка";
+    message.success = "Спасибо! Скоро мы с вами свяжемся";
+    message.failure = "Что-то пошло не так";
+
+    let form = document.getElementsByClassName('main-form')[0],
+        input = form.getElementsByTagName('input'),
+        statusMessage = document.createElement('div');
+
+    statusMessage.classList.add('status');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        form.appendChild(statusMessage);
+
+        //AJAX
+        let request = new XMLHttpRequest();
+        request.open("POST", "server.php");
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        let formData = new FormData(form);
+
+        request.send(formData);
+
+        request.onreadystatechange = function() {
+            if (request.readyState < 4) {
+                statusMessage.innerHTML = message.loading;
+            } else if (request.readyState === 4) {
+                if (request.status == 200 && request.status < 300) {
+                    statusMessage.innerHTML = message.success;
+                    //add some content if you wish
+                } else {
+                    statusMessage.innerHTML = message.failure;
+                }
+            }
+        }
+        for (let i = 0; i < input.length; i++) {
+            input[i].value = '';
+            //clean up inputs
+        }
+    });
+
+
+
+
+
+
+
 });
